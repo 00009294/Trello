@@ -10,6 +10,6 @@ namespace Trello.Core.Models
     public class User : IdentityUser
     {
         public string Name { get; set; } = string.Empty;
-        List<Board?> Boards { get; set; }
+        public List<Board> Boards { get; set; }
     }
 }
