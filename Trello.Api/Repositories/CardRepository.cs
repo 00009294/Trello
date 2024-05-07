@@ -7,7 +7,7 @@ namespace Trello.Api.Repositories
     public class CardRepository
         : EfBaseRepository<Card, AppDbContext>
     {
-        public CardRepository(AppDbContext context) 
+        public CardRepository(AppDbContext context)
             : base(context)
         {
         }
