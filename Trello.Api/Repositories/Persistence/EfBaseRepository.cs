@@ -2,10 +2,10 @@
 using System.Linq.Expressions;
 using Trello.Infrastructure.DataContext;
 
-namespace Trello.Api.Repositories
+namespace Trello.Api.Repositories.Persistence
 {
     public class EfBaseRepository<TEntity, TContext> : IAsyncRepository<TEntity>
-        where TEntity : class 
+        where TEntity : class
         where TContext : DbContext
     {
         protected readonly TContext context;
@@ -14,26 +14,26 @@ namespace Trello.Api.Repositories
             this.context = context;
         }
 
-        public async Task<TEntity> AddAsync(TEntity entity, 
+        public async Task<TEntity> AddAsync(TEntity entity,
             CancellationToken cancellationToken = default)
         {
-            await this.context.AddAsync(entity, cancellationToken);
-            await this.context.SaveChangesAsync();
+            await context.AddAsync(entity, cancellationToken);
+            await context.SaveChangesAsync();
 
             return entity;
         }
 
-        public async Task<TEntity> DeleteAsync(TEntity entity, 
+        public async Task<TEntity> DeleteAsync(TEntity entity,
             CancellationToken cancellationToken = default)
         {
-            this.context.Remove(entity);
-            await this.context.SaveChangesAsync();
+            context.Remove(entity);
+            await context.SaveChangesAsync();
 
             return entity;
         }
 
         public Task<List<TEntity>> GetAllAsync(
-            Expression<Func<TEntity, bool>> predicate = null, 
+            Expression<Func<TEntity, bool>> predicate = null,
             CancellationToken cancellationToken = default)
         {
             IQueryable<TEntity> queryable = Query();
@@ -41,7 +41,7 @@ namespace Trello.Api.Repositories
             return queryable.ToListAsync();
         }
 
-        public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate, 
+        public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate,
             CancellationToken cancellationToken = default)
         {
             IQueryable<TEntity> queryable = Query();
@@ -49,19 +49,19 @@ namespace Trello.Api.Repositories
             return await queryable.FirstOrDefaultAsync(predicate, cancellationToken);
         }
 
-        public async Task<TEntity> UpdateAsync(TEntity entity, 
+        public async Task<TEntity> UpdateAsync(TEntity entity,
             CancellationToken cancellationToken = default)
         {
-            this.context.Update(entity);
-            await this.context.SaveChangesAsync(cancellationToken);
+            context.Update(entity);
+            await context.SaveChangesAsync(cancellationToken);
 
             return entity;
-        
+
         }
 
         private IQueryable<TEntity> Query()
         {
-            return this.context.Set<TEntity>();
+            return context.Set<TEntity>();
         }
     }
 }

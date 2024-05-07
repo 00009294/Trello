@@ -1,10 +1,10 @@
 ﻿using System.Linq.Expressions;
 
-namespace Trello.Api.Repositories
+namespace Trello.Api.Repositories.Persistence
 {
-    public interface IAsyncRepository<TEntity> 
+    public interface IAsyncRepository<TEntity>
         where TEntity : class
-        
+
     {
         Task<TEntity?> GetAsync(
             Expression<Func<TEntity, bool>> predicate,
@@ -15,13 +15,13 @@ namespace Trello.Api.Repositories
             CancellationToken cancellationToken = default);
 
         Task<TEntity> AddAsync(
-            TEntity entity, 
+            TEntity entity,
             CancellationToken cancellationToken = default);
         Task<TEntity> UpdateAsync(
-            TEntity entity, 
+            TEntity entity,
             CancellationToken cancellationToken = default);
         Task<TEntity> DeleteAsync(
-            TEntity entity, 
+            TEntity entity,
             CancellationToken cancellationToken = default);
     }
 }
