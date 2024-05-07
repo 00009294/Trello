@@ -1,7 +1,8 @@
 ````
 Trello Application
 Overview
-This project is a Trello application built on .NET 8 using MediatR CQRS. It allows users to manage tasks, create boards, and collaborate effectively.
+This project is a Trello application built on .NET 8 using MediatR CQRS.
+It allows users to manage tasks, create boards, and collaborate effectively.
 
 Features
   * Create and manage boards
