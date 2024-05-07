@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using Trello.Infrastructure.DataContext;
 
 namespace Trello.Api.Repositories.Persistence
 {

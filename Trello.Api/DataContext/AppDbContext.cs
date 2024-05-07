@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Trello.Core.Models;
 
 namespace Trello.Infrastructure.DataContext
@@ -14,13 +9,13 @@ namespace Trello.Infrastructure.DataContext
     {
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
-            : base (options) { }
-            
+            : base(options) { }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            
+
             builder.Entity<User>()
                 .Ignore(u => u.AccessFailedCount)
                 .Ignore(u => u.LockoutEnabled)
@@ -28,7 +23,7 @@ namespace Trello.Infrastructure.DataContext
                 .Ignore(u => u.TwoFactorEnabled)
                 .Ignore(u => u.PhoneNumber);
             builder.Entity<User>().ToTable("Users");
-            
+
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
@@ -36,7 +31,7 @@ namespace Trello.Infrastructure.DataContext
         public virtual DbSet<Card> Cards => Set<Card>();
         public virtual DbSet<Column> Columns => Set<Column>();
 
-        
+
     }
 
 }
